@@ -14,6 +14,9 @@ public class Projectile : MonoBehaviour {
             var impact = Instantiate(impactVFX,other.contacts[0].point, Quaternion.identity) as GameObject;
             
             Destroy(impact, 2f);
+            if (other.gameObject.tag == "BasicEnemy") {
+                Destroy(other.gameObject);
+            }
             Destroy(gameObject);
         }
     }
