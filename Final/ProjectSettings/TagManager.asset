@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - FallingSphere
+  - BasicEnemy
+  - Bullet
+  - Core
   layers:
   - Default
   - TransparentFX
@@ -13,8 +16,8 @@ TagManager:
   - Water
   - UI
   - PlayerLayer
-  - 
-  - 
+  - Attack Radius
+  - Enemy
   - 
   - 
   - 

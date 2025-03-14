@@ -4,6 +4,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
     
     public GameObject impactVFX;
+    public float damage;
     
     private bool collided;
     

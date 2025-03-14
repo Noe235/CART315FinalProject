@@ -1,21 +1,23 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class FPSShooter : MonoBehaviour
 {
     public Camera cam;
+    public VisualEffect flamethrower;
     public GameObject projectile;
     public Transform LHFirePoint, RHFirePoint;
     public float projectileSpeed = 30;
     public float fireRate = 4;
 
+    
     private Vector3 destination;
     private bool leftHand;
     private float timeToFire;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+    void Start() {
+        flamethrower.Stop();
     }
 
     // Update is called once per frame
@@ -24,6 +26,15 @@ public class FPSShooter : MonoBehaviour
         if (Input.GetButton("Fire1") && Time.time >= timeToFire) {
             timeToFire = Time.time + 1f / fireRate;
             ShootProjectile();
+        }
+        
+        if(Input.GetButtonDown("Fire2"))
+        {
+            flamethrower.Play();
+        }
+
+        if (Input.GetButtonUp("Fire2")) {
+            flamethrower.Stop();
         }
     }
     void ShootProjectile() {
