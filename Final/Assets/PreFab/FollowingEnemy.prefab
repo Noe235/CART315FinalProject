@@ -404,6 +404,7 @@ GameObject:
   - component: {fileID: 6467863521120286679}
   - component: {fileID: 7378322618691816904}
   - component: {fileID: 3418188541389322283}
+  - component: {fileID: 7617766826250203435}
   m_Layer: 0
   m_Name: FollowingEnemy
   m_TagString: BasicEnemy
@@ -515,8 +516,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 976d54a21eecd284e9c4652e6fb310d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  core: {fileID: 6641758341447922605, guid: 27d718dd90b27e7419bd4c042706c3ba, type: 3}
+  player: {fileID: 0}
   followspeed: 1.5
   health: 0
   maxHealth: 0
   healthBar: {fileID: 5167248849753440526}
+  agent: {fileID: 7617766826250203435}
+--- !u!195 &7617766826250203435
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9216707545005544090}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

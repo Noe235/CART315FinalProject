@@ -15,6 +15,8 @@ public class FPSShooter : MonoBehaviour
     private bool leftHand;
     private float timeToFire;
     
+   
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         flamethrower.Stop();
