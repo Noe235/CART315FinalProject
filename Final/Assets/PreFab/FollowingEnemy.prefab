@@ -280,6 +280,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSlider: {fileID: 6713494844694521274}
+  cam: {fileID: 0}
+  target: {fileID: 2206294159061007553}
+  offset: {x: 0, y: 1.5, z: 0}
 --- !u!1 &8052222806907366823
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,8 +522,8 @@ MonoBehaviour:
   core: {fileID: 6641758341447922605, guid: 27d718dd90b27e7419bd4c042706c3ba, type: 3}
   player: {fileID: 0}
   followspeed: 1.5
-  health: 0
-  maxHealth: 0
+  health: 100
+  maxHealth: 100
   healthBar: {fileID: 5167248849753440526}
   agent: {fileID: 7617766826250203435}
 --- !u!195 &7617766826250203435

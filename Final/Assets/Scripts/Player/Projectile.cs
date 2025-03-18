@@ -4,7 +4,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
     
     public GameObject impactVFX;
-    public float damage;
+    public float damage = 10;
     
     private bool collided;
     
@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour {
             
             Destroy(impact, 2f);
             if (other.gameObject.tag == "BasicEnemy") {
-                Destroy(other.gameObject);
+                other.gameObject.GetComponent<FollowingEnemy>().TakeDamage(damage);
             }
             Destroy(gameObject);
         }

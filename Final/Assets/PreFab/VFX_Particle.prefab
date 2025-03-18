@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   impactVFX: {fileID: 9179633077357390555, guid: a9157a61db073a848a6da3e530d0925f, type: 3}
+  damage: 10
 --- !u!1 &8876724705512987755
 GameObject:
   m_ObjectHideFlags: 0

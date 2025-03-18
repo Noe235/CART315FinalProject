@@ -27,7 +27,8 @@ public class FollowingEnemy : MonoBehaviour
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    { 
+        health = maxHealth;
       core = GameObject.FindGameObjectWithTag("Core");
       player = GameObject.FindGameObjectWithTag("Player");
       
@@ -73,16 +74,14 @@ public class FollowingEnemy : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision other) {
+  /*  private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Bullet") {
             var damage = GetComponent<Projectile>().damage;
             TakeDamage(damage);
         }
-        
-        
     }
-
-    private void TakeDamage(float damageAmount) {
+*/
+    public void TakeDamage(float damageAmount) {
         health -= damageAmount;
         healthBar.UpdateHealthBar(health,maxHealth);
         if (health <= 0) {
