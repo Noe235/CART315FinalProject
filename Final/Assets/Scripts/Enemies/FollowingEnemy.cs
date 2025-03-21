@@ -12,6 +12,7 @@ public class FollowingEnemy : MonoBehaviour
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
     [SerializeField] private EnemyHealth healthBar;
+    [SerializeField] private float enemyDamage = 10;
 
     public NavMeshAgent agent;
     
@@ -74,13 +75,12 @@ public class FollowingEnemy : MonoBehaviour
         
     }
 
-  /*  private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Bullet") {
-            var damage = GetComponent<Projectile>().damage;
-            TakeDamage(damage);
+   private void OnCollisionEnter(Collision other) {
+        if (other.gameObject.tag == "Player") {
+            PlayerManager.health -= enemyDamage;
         }
     }
-*/
+
     public void TakeDamage(float damageAmount) {
         health -= damageAmount;
         healthBar.UpdateHealthBar(health,maxHealth);

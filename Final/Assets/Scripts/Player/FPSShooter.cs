@@ -10,6 +10,8 @@ public class FPSShooter : MonoBehaviour
     public float projectileSpeed = 30;
     public float fireRate = 4;
 
+    static public int spellLevel = 1;
+    
     
     private Vector3 destination;
     private bool leftHand;
@@ -25,18 +27,19 @@ public class FPSShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("Fire1") && Time.time >= timeToFire) {
-            timeToFire = Time.time + 1f / fireRate;
-            ShootProjectile();
-        }
-        
-        if(Input.GetButtonDown("Fire2"))
-        {
-            flamethrower.Play();
-        }
+        if (gameObject.GetComponent<FPSController>().mouseOff) {
+            if (Input.GetButton("Fire1") && Time.time >= timeToFire) {
+                timeToFire = Time.time + 1f / fireRate;
+                ShootProjectile();
+            }
 
-        if (Input.GetButtonUp("Fire2")) {
-            flamethrower.Stop();
+            if (Input.GetButtonDown("Fire2")) {
+                flamethrower.Play();
+            }
+
+            if (Input.GetButtonUp("Fire2")) {
+                flamethrower.Stop();
+            }
         }
     }
     void ShootProjectile() {

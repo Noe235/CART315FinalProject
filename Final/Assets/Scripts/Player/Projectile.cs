@@ -5,10 +5,17 @@ public class Projectile : MonoBehaviour {
     
     public GameObject impactVFX;
     public float damage = 10;
+ 
     
     private bool collided;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start() {
+        if (FPSShooter.spellLevel == 2) {
+            damage = damage*2;
+        }
+    }
+    
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag != "Player" && other.gameObject.tag != "Bullet" && !collided) {
             collided = true;

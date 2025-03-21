@@ -54,6 +54,15 @@ public class FPSController : MonoBehaviour {
             MouseEnabler();
         }
 
+        if (Input.GetKey(KeyCode.K)) {
+            FPSShooter.spellLevel = 2;
+        }
+
+        if (Input.GetKey(KeyCode.L)) {
+            FPSShooter.spellLevel = 1;
+        }
+        
+
     }
 
     public void MouseEnabler() {
