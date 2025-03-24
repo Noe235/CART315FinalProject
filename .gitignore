@@ -22,6 +22,7 @@ Temp/
 Obj/
 Logs/
 Bin/
+UserSettings/
 
 # erroneous meta files
 library.meta
