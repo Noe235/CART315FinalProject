@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
+// Health Script for the **Target**
 
 public class Health : MonoBehaviour {
     [Header("Health Settings")]
@@ -41,7 +45,12 @@ public class Health : MonoBehaviour {
 
     void Die() {
         Debug.Log(gameObject.name + " has died!");
-        // For now, just destroy the GameObject
+        // add mouse back (to click button)
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        // load GameOver scene
+        SceneManager.LoadScene("Scenes/Game Scene/GameOverScene");
+        // Destroy the target GameObject
         Destroy(gameObject);
     }
 }
