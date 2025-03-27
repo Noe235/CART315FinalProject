@@ -4,7 +4,7 @@ using UnityEngine.VFX;
 
 public class FPSShooter : MonoBehaviour {
     public Camera cam;
-    public VisualEffect flamethrower;
+    
     public GameObject fireball;
     public GameObject ice;
     public Transform LHFirePoint, RHFirePoint, IceFirePoint1, IceFirePoint2, IceFirePoint3, IceFirePoint4, IceFirePoint5;
@@ -12,6 +12,8 @@ public class FPSShooter : MonoBehaviour {
     public float fireRate = 4;
     public string spell;
     static public int spellLevel = 1;
+    
+    [SerializeField] private Flamethrower Flamethrower;
     
 
     private Vector3 destination;
@@ -23,7 +25,6 @@ public class FPSShooter : MonoBehaviour {
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        flamethrower.Stop();
         spell = "Fire";
     }
 
@@ -44,11 +45,11 @@ public class FPSShooter : MonoBehaviour {
                 }
 
                 if (Input.GetButtonDown("Fire2")) {
-                    flamethrower.Play();
+                  Flamethrower.Shoot();
                 }
 
                 if (Input.GetButtonUp("Fire2")) {
-                    flamethrower.Stop();
+                   Flamethrower.StopShooting();
                 }
                 
         }
