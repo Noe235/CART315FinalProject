@@ -19,7 +19,8 @@ public class CoreHealth : MonoBehaviour
     }
 
     public void TakeDamage(float damage) {
-        Debug.Log(gameObject.name + " took " + damage + " damage. Current HP: " + currentHealth);
+        // TO DO: FIX DEBUG LOG: Debug.Log(gameObject.name + " took " + damage + " damage. Current HP: " + currentHealth);
+        Debug.Log($"{gameObject.name} took {damage} damage! Core HP is now: {currentHealth}");
         currentHealth -= damage;
         
         // update floating bar
@@ -29,7 +30,8 @@ public class CoreHealth : MonoBehaviour
         
         // check for death
         if (currentHealth <= 0) {
-            Debug.Log(gameObject.name + " has died!");
+            //TO DO FIX DEBUG (it doesn't work) Debug.Log(gameObject.name + " has died!");
+            // Debug.Log($"{gameObject.name} has 0 HP! Game Over...");
              
             // unlock cursor and show it (to click button in game over scene)
             Cursor.lockState = CursorLockMode.None;
