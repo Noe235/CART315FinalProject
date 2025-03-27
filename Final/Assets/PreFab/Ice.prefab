@@ -108,8 +108,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.90588236, g: 0.41333395, b: 0.18431371, a: 1}
-      key1: {r: 0.8396226, g: 0.031893883, b: 0, a: 1}
+      key0: {r: 0.18431371, g: 0.90588236, b: 0.8308746, a: 1}
+      key1: {r: 0, g: 0.5172473, b: 0.8392157, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 5259658467030942494}
   - component: {fileID: 952427464448559599}
   m_Layer: 0
-  m_Name: VFX_Particle
+  m_Name: Ice
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6c678f40bdde140805a534983e8f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactVFX: {fileID: 9179633077357390555, guid: a9157a61db073a848a6da3e530d0925f, type: 3}
+  impactVFX: {fileID: 9179633077357390555, guid: c3f9c4857b5fc4f41b342e7267eead4c, type: 3}
   damage: 10
 --- !u!1 &8876724705512987755
 GameObject:
@@ -469,7 +469,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.90588236, g: 0.43544364, b: 0.18431371, a: 1}
+      maxColor: {r: 0.18431371, g: 0.90588236, b: 0.85210013, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
