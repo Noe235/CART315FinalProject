@@ -8,6 +8,7 @@ TagManager:
   - BasicEnemy
   - Bullet
   - Core
+  - Item
   layers:
   - Default
   - TransparentFX
