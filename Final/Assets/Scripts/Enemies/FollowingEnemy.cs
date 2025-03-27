@@ -13,88 +13,125 @@ public class FollowingEnemy : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private EnemyHealth healthBar;
     [SerializeField] private float enemyDamage = 10;
+    
+    [SerializeField] private TargetType targetType = TargetType.CoreOnly;
 
     public NavMeshAgent agent;
     
-    private enum State {
-        HeadToCore,
-        AttackPlayer,
+    // private enum State {
+    //     HeadToCore,
+    //     AttackPlayer,
+    // }
+    
+    public enum TargetType {
+        CoreOnly,
+        PlayerOnly 
     }
-    private State state;
+    
+    // private State state;
 
-    void Awake() {
-        healthBar = GetComponentInChildren<EnemyHealth>();
-        state = State.HeadToCore;
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    { 
+    // void Awake() {
+    //     healthBar = GetComponentInChildren<EnemyHealth>();
+    //     state = State.HeadToCore;
+    // }
+    // // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start() {
         health = maxHealth;
-      core = GameObject.FindGameObjectWithTag("Core");
-      player = GameObject.FindGameObjectWithTag("Player");
-      
-      
+        core = GameObject.FindGameObjectWithTag("Core");
+        player = GameObject.FindGameObjectWithTag("Player");
+        
+        if (!healthBar) {
+            healthBar = GetComponentInChildren<EnemyHealth>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch (state) {
-            default:
-                case State.HeadToCore:
-                    //Previous movement toward target script
-                   // transform.position = Vector3.MoveTowards(transform.position, target.transform.position, followspeed * Time.deltaTime); //go toward target
-                  //  transform.forward = target.transform.position - transform.position;
-                   agent.SetDestination(core.transform.position); //to work nav mesh surface needs to be put on the surface
-                    FindPlayer();
+        // switch (state) {
+        //     default:
+        //         case State.HeadToCore:
+        //             //Previous movement toward target script
+        //            // transform.position = Vector3.MoveTowards(transform.position, target.transform.position, followspeed * Time.deltaTime); //go toward target
+        //           //  transform.forward = target.transform.position - transform.position;
+        //            agent.SetDestination(core.transform.position); //to work nav mesh surface needs to be put on the surface
+        //             FindPlayer();
+        //         break;
+        //     
+        //     case State.AttackPlayer:
+        //         agent.SetDestination(player.transform.position);
+        //
+        //         float attackRange = 10f;
+        //         
+        //         //target too far go back to core
+        //         if (Vector3.Distance(transform.position, player.transform.position) > 18f) {
+        //             state = State.HeadToCore;
+        //         }
+        //         if (Vector3.Distance(transform.position, player.transform.position) < attackRange) {
+        //             //within attack range
+        //             //in prevention of the attaack being on each frames 
+        //            // if (Time.time > nextshootTime){
+        //            //float firerate = enemy.attackspeed
+        //            //nexshootTime = Time.time + firerate
+        //            // }
+        //            //
+        //             //insert attack animation or like script
+        //         }
+
+        // updated to move toward only the assigned target (core or player)
+        switch (targetType) {
+            case TargetType.CoreOnly:
+                if (core != null) {
+                    agent.SetDestination(core.transform.position);
+                }
                 break;
-            
-            case State.AttackPlayer:
-                agent.SetDestination(player.transform.position);
 
-                float attackRange = 10f;
-                
-                //target too far go back to core
-                if (Vector3.Distance(transform.position, player.transform.position) > 18f) {
-                    state = State.HeadToCore;
+            case TargetType.PlayerOnly:
+                if (player != null) {
+                    agent.SetDestination(player.transform.position);
                 }
-                if (Vector3.Distance(transform.position, player.transform.position) < attackRange) {
-                    //within attack range
-                    //in prevention of the attaack being on each frames 
-                   // if (Time.time > nextshootTime){
-                   //float firerate = enemy.attackspeed
-                   //nexshootTime = Time.time + firerate
-                   // }
-                   //
-                    //insert attack animation or like script
-                }
-
                 break;
         }
-      
-        
     }
 
    private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Player") {
+        // if (other.gameObject.tag == "Player") {
+        //     // damage player
+        //     PlayerManager.health -= enemyDamage; 
+       
+        
+        // If this enemy is PlayerOnly, damage the player
+        if (targetType == TargetType.PlayerOnly && other.gameObject.CompareTag("Player")) {
+            // Decrease static player HP
             PlayerManager.health -= enemyDamage;
+            Debug.Log(name + " collided with Player, dealing " + enemyDamage + " damage. Player HP is now: " + PlayerManager.health);
+
+            // If this enemy is CoreOnly, damage the core
+        } else if (targetType == TargetType.CoreOnly && other.gameObject.CompareTag("Core")) {
+            CoreHealth ch = other.gameObject.GetComponent<CoreHealth>();
+            if (ch != null) {
+                ch.TakeDamage(enemyDamage);
+                Debug.Log(name + " collided with Core, dealing " + enemyDamage + " damage.");
+            }
         }
-    }
+   }
 
     public void TakeDamage(float damageAmount) {
         health -= damageAmount;
-        healthBar.UpdateHealthBar(health,maxHealth);
+        if (healthBar) {
+            healthBar.UpdateHealthBar(health, maxHealth);
+        }
         if (health <= 0) {
             Destroy(gameObject);
         }
     }
 
-    private void FindPlayer() {
-        float playerDetectRange = 15f;
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (Vector3.Distance(transform.position, player.transform.position) < playerDetectRange) {
-            //if near the player range change state
-            state = State.AttackPlayer;
-        }
-    }
+    // private void FindPlayer() {
+    //     float playerDetectRange = 15f;
+    //     player = GameObject.FindGameObjectWithTag("Player");
+    //     if (Vector3.Distance(transform.position, player.transform.position) < playerDetectRange) {
+    //         //if near the player range change state
+    //         state = State.AttackPlayer;
+    //     }
+    // }
 }
