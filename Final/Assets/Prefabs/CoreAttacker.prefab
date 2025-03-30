@@ -529,6 +529,7 @@ MonoBehaviour:
   enemyDamage: 10
   targetType: 0
   agent: {fileID: 1213107106498628955}
+  uuid: 
 --- !u!195 &1213107106498628955
 NavMeshAgent:
   m_ObjectHideFlags: 0
