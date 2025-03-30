@@ -4,7 +4,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FollowingEnemy : MonoBehaviour, IBurnable //IDamageable
+public class FollowingEnemy : MonoBehaviour
 {
     [SerializeField] private GameObject core;
     [SerializeField] private GameObject player;
@@ -18,34 +18,32 @@ public class FollowingEnemy : MonoBehaviour, IBurnable //IDamageable
     [SerializeField] private TargetType targetType = TargetType.CoreOnly;
 
     public NavMeshAgent agent;
+    
+    public bool Flamed = false;
 
-    // from flame thrower tutorial proably can refine some stuff
-    [SerializeField] private int _Health;
-    public int Health{get => _Health; set => _Health = value; }
+    public string uuid;
     
-    [SerializeField]
-    private bool _IsBurning;
-    public bool IsBurning { get => _IsBurning; set => _IsBurning = value; }
-    
-    private Coroutine BurnCoroutine;
-    
-    public event DeathEvent OnDeath;
-    public delegate void DeathEvent(Enemy Enemy);
     
     public enum TargetType {
         CoreOnly,
         PlayerOnly 
     }
-    
+
+    void Awake() {
+        uuid = System.Guid.NewGuid().ToString();
+    }
    
     void Start() {
         health = maxHealth;
         core = GameObject.FindGameObjectWithTag("Core");
         player = GameObject.FindGameObjectWithTag("Player");
         
+        
+        
         if (!healthBar) {
             healthBar = GetComponentInChildren<EnemyHealth>();
         }
+        
     }
 
     // Update is called once per frame
@@ -95,6 +93,9 @@ public class FollowingEnemy : MonoBehaviour, IBurnable //IDamageable
                 }
                 break;
         }
+
+
+     
     }
 
    private void OnCollisionEnter(Collision other) {
@@ -121,46 +122,19 @@ public class FollowingEnemy : MonoBehaviour, IBurnable //IDamageable
         
    }
 
-    public void TakeDamage(float damageAmount) {
+    public bool TakeDamage(float damageAmount) {
         health -= damageAmount;
         if (healthBar) {
             healthBar.UpdateHealthBar(health, maxHealth);
         }
         if (health <= 0) {
-            StopBurning();
             Destroy(gameObject);
+            return true;
         }
+        return false;
     }
-
-  
-
-    public void StartBurning(int DamagePerSecond) {
-        IsBurning = true;
-        if (BurnCoroutine != null) {
-            StopCoroutine(BurnCoroutine);
-        }
-
-        BurnCoroutine = StartCoroutine(Burn(DamagePerSecond));
-    }
-
-    private IEnumerator Burn(int DamagePerSecond) {
-        float minTimeToDamage = 1f/DamagePerSecond;
-        WaitForSeconds wait = new WaitForSeconds(minTimeToDamage);
-        int damagePerTick = Mathf.FloorToInt(minTimeToDamage) + 1;
-        
-        TakeDamage(damagePerTick);
-        while (IsBurning) {
-            yield return wait;
-            TakeDamage(damagePerTick);
-        }
-    }
-
-    public void StopBurning() {
-        IsBurning = false;
-        if (BurnCoroutine != null) {
-            StopCoroutine(BurnCoroutine);
-        }
-    }
+    
+   
     
     
     // private void FindPlayer() {
@@ -173,14 +147,3 @@ public class FollowingEnemy : MonoBehaviour, IBurnable //IDamageable
     // }
 }
 
-public interface IDamageable {
-    public int Health { get; set; }
-    public void TakeDamage(int damageAmount);
-}
-
-
-public interface IBurnable {
-    public bool IsBurning { get; set; }
-    public void StartBurning(int DamagePerSecond);
-    public void StopBurning();
-}

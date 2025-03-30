@@ -13,7 +13,7 @@ public class FPSShooter : MonoBehaviour {
     public string spell;
     static public int spellLevel = 1;
     
-    [SerializeField] private Flamethrower Flamethrower;
+    [SerializeField] private GameObject Flamethrower;
     
 
     private Vector3 destination;
@@ -26,6 +26,7 @@ public class FPSShooter : MonoBehaviour {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         spell = "Fire";
+        
     }
 
     // Update is called once per frame
@@ -38,20 +39,37 @@ public class FPSShooter : MonoBehaviour {
             }
             Debug.Log("Key down");
         }
+
+        if (Input.GetKeyDown(KeyCode.T)) {
+            if (spellLevel < 4) {
+                spellLevel++;
+            }
+            else {
+                spellLevel = 1;
+            }
+            Debug.Log(spellLevel);
+        }
+
+
         if (gameObject.GetComponent<FPSController>().mouseOff) {
+            if (spellLevel == 3) {
+                if (Input.GetButtonDown("Fire1")) {
+                    Flamethrower.gameObject.SetActive(true);
+                }
+
+                if (Input.GetButtonUp("Fire1")) {
+                    Flamethrower.gameObject.SetActive(false);
+                }
+            }
+            else {
+
                 if (Input.GetButton("Fire1") && Time.time >= timeToFire) {
                     timeToFire = Time.time + 1f / fireRate;
                     ShootProjectile();
                 }
+            }
 
-                if (Input.GetButtonDown("Fire2")) {
-                  Flamethrower.Shoot();
-                }
 
-                if (Input.GetButtonUp("Fire2")) {
-                   Flamethrower.StopShooting();
-                }
-                
         }
     }
 
