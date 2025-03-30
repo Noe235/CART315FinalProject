@@ -6,7 +6,8 @@ public class EnemySpawner : MonoBehaviour {
     public GameObject[] Enemies;
     public float SpawnRate;
     public float SpawnPositions;
-    
+
+    [SerializeField] private int minRx,maxRx,minRy,maxRy;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         StartCoroutine(enemiesSpawner());
@@ -19,8 +20,8 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     private IEnumerator enemiesSpawner() {
-        int rX = Random.Range(-22, 31);
-        int rY = Random.Range(-22, 27);
+        int rX = Random.Range(minRx, maxRx);
+        int rY = Random.Range(minRy, maxRy);
         GameObject spawnee = Enemies[Random.Range(0, Enemies.Length)];
         
         Vector3 Loc = new Vector3(rX, 0, rY);
