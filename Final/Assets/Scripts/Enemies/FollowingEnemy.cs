@@ -18,8 +18,6 @@ public class FollowingEnemy : MonoBehaviour
     [SerializeField] private TargetType targetType = TargetType.CoreOnly;
 
     public NavMeshAgent agent;
-    
-    public bool Flamed = false;
 
     public string uuid;
     
