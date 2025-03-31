@@ -16,7 +16,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     void Start() {
        InitializeItem(item); // just to testing if the sprite appears
     }
-    
+
     public void InitializeItem(Item newItem) {
         item = newItem;
         image.sprite = newItem.image;
@@ -33,6 +33,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 //Drag and Drop
     public void OnBeginDrag(PointerEventData eventData) {
         image.raycastTarget = false;
+        countText.raycastTarget = false;
         parentAfterDrag = transform.parent;
         transform.SetParent(transform.root);
         transform.SetAsLastSibling();
@@ -40,10 +41,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData) {
         transform.position = Input.mousePosition;
+       
     }
 
     public void OnEndDrag(PointerEventData eventData) {
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
+        countText.raycastTarget = true;
     }
 }

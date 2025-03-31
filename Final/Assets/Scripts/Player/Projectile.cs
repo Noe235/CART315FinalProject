@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour {
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        if (FPSShooter.spellLevel == 2) {
+        if (FPSShooter.spellLevelFire == 2) {
             damage = damage*2;
         }
     }

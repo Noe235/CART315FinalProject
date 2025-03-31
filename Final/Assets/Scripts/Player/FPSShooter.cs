@@ -7,11 +7,12 @@ public class FPSShooter : MonoBehaviour {
     
     public GameObject fireball;
     public GameObject ice;
-    public Transform LHFirePoint, RHFirePoint, IceFirePoint1, IceFirePoint2, IceFirePoint3, IceFirePoint4, IceFirePoint5;
+    public Transform LHFirePoint, RHFirePoint, IceFirePoint1, IceFirePoint2, IceFirePoint3, IceFirePoint4, IceFirePoint5; //from left ot right
     public float projectileSpeed = 30;
     public float fireRate = 4;
     public string spell;
-    static public int spellLevel = 1;
+    static public int spellLevelFire = 1;
+    static public int spellLevelIce = 1;
     
     [SerializeField] private GameObject Flamethrower;
     
@@ -41,18 +42,28 @@ public class FPSShooter : MonoBehaviour {
         }
 
         if (Input.GetKeyDown(KeyCode.T)) {
-            if (spellLevel < 4) {
-                spellLevel++;
+            if (spellLevelFire < 4) {
+                spellLevelFire++;
             }
             else {
-                spellLevel = 1;
+                spellLevelFire = 1;
             }
-            Debug.Log(spellLevel);
+            Debug.Log(spellLevelFire);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y)) {
+            if (spellLevelIce < 4) {
+                spellLevelIce++;
+            }
+            else {
+                spellLevelIce = 1;
+            }
+            Debug.Log(spellLevelIce);
         }
 
 
         if (gameObject.GetComponent<FPSController>().mouseOff) {
-            if (spellLevel == 3) {
+            if (spellLevelFire == 3) {
                 if (Input.GetButtonDown("Fire1")) {
                     Flamethrower.gameObject.SetActive(true);
                 }
@@ -95,11 +106,16 @@ public class FPSShooter : MonoBehaviour {
        }
 
        if (spell == "Ice") { //probably make an array ._.
-           ShootIce(IceFirePoint1);
-           ShootIce(IceFirePoint2);
+           
            ShootIce(IceFirePoint3);
-           ShootIce(IceFirePoint4);
-           ShootIce(IceFirePoint5);
+           if (spellLevelIce >= 2) {
+               ShootIce(IceFirePoint2);
+               ShootIce(IceFirePoint4);
+               if (spellLevelIce >= 3) {
+                   ShootIce(IceFirePoint1);
+                   ShootIce(IceFirePoint5);
+               }
+           }
        }
     }
 
