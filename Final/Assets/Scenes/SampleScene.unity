@@ -1411,6 +1411,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -4.380005
       objectReference: {fileID: 0}
+    - target: {fileID: 198637950067575458, guid: 007c57e2df8e9b144b99f471b84f3d56, type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 5.0574093
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2555,7 +2559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1147359306
 Transform:
   m_ObjectHideFlags: 0
@@ -3127,6 +3131,7 @@ MonoBehaviour:
   jumpSpeed: 20
   gravity: 20
   mouseOff: 1
+  playerCollider: {fileID: 0}
 --- !u!143 &1341122868
 CharacterController:
   m_ObjectHideFlags: 0
