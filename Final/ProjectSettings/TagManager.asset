@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Core
   - Item
+  - PlayerManager
   layers:
   - Default
   - TransparentFX

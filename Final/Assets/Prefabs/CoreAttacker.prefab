@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: -1608193427252023268}
   - component: {fileID: 1213107106498628955}
   - component: {fileID: 6078628851423517745}
+  - component: {fileID: -8450228090644510624}
   m_Layer: 0
   m_Name: CoreAttacker
   m_TagString: BasicEnemy
@@ -500,7 +501,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -523,6 +524,7 @@ MonoBehaviour:
   core: {fileID: 0}
   player: {fileID: 0}
   followspeed: 1.5
+  playerManager: {fileID: 0}
   health: 100
   maxHealth: 100
   healthBar: {fileID: 8932645962934041931}
@@ -579,3 +581,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &-8450228090644510624
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363870249841656384}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

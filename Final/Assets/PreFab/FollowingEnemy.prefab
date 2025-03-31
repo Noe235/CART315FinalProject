@@ -408,8 +408,7 @@ GameObject:
   - component: {fileID: 7378322618691816904}
   - component: {fileID: 3418188541389322283}
   - component: {fileID: 7617766826250203435}
-  - component: {fileID: 3643942511128461490}
-  - component: {fileID: 6882794144554728857}
+  - component: {fileID: 4342205409114346230}
   m_Layer: 0
   m_Name: FollowingEnemy
   m_TagString: BasicEnemy
@@ -501,14 +500,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.57493615
+  m_Height: 2.0811434
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0.018417954, y: 0.04057169, z: 0.02969122}
 --- !u!114 &3418188541389322283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,12 +523,14 @@ MonoBehaviour:
   core: {fileID: 0}
   player: {fileID: 0}
   followspeed: 1.5
+  playerManager: {fileID: 0}
   health: 100
   maxHealth: 100
   healthBar: {fileID: 5167248849753440526}
   enemyDamage: 10
   targetType: 1
   agent: {fileID: 7617766826250203435}
+  uuid: 
 --- !u!195 &7617766826250203435
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -552,34 +553,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &3643942511128461490
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9216707545005544090}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!136 &6882794144554728857
+--- !u!136 &4342205409114346230
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,4 +1,5 @@
 using System.Runtime.ExceptionServices;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -125,7 +126,7 @@ public class FPSShooter : MonoBehaviour {
     }
 
     void ShootIce(Transform firePoint) {
-        GameObject projectileObj = Instantiate(ice, firePoint.position, Quaternion.identity);
+        GameObject projectileObj = Instantiate(ice, firePoint.position, firePoint.rotation) as GameObject;
         projectileObj.GetComponent<Rigidbody>().AddForce(firePoint.forward * projectileSpeed, ForceMode.Impulse); 
     }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -16,5 +17,15 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         healthBar.fillAmount = Mathf.Clamp(health/maxHealth, 0, 1);
+    }
+    
+    public void TakeDamage(float damageAmount) {
+        health -= damageAmount;
+        healthBar.fillAmount = Mathf.Clamp(health/maxHealth, 0, 1);
+        Debug.Log(health);
+        if (health <= 0) {
+            SceneManager.LoadScene("Scenes/Game Scene/GameOverScene");
+        }
+     
     }
 }

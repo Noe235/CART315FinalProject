@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class FPSController : MonoBehaviour {
     public int FPS = 120;
     public float speed = 6.0F;
@@ -9,6 +11,7 @@ public class FPSController : MonoBehaviour {
     
     private Vector3 moveDirection = Vector3.zero;
     
+    [SerializeField] private Collider playerCollider;
 
     float yRotation;
     float xRotation;
@@ -69,4 +72,5 @@ public class FPSController : MonoBehaviour {
         }
         
     }
+    
 }

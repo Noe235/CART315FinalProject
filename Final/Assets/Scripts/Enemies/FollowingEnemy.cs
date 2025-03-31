@@ -9,6 +9,7 @@ public class FollowingEnemy : MonoBehaviour
     [SerializeField] private GameObject core;
     [SerializeField] private GameObject player;
     [SerializeField] private float followspeed;
+    [SerializeField] private GameObject playerManager;
 
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
@@ -35,6 +36,7 @@ public class FollowingEnemy : MonoBehaviour
         health = maxHealth;
         core = GameObject.FindGameObjectWithTag("Core");
         player = GameObject.FindGameObjectWithTag("Player");
+        playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
         
         
         
@@ -97,19 +99,7 @@ public class FollowingEnemy : MonoBehaviour
     }
 
    private void OnCollisionEnter(Collision other) {
-        // if (other.gameObject.tag == "Player") {
-        //     // damage player
-        //     PlayerManager.health -= enemyDamage; 
-       
-        
-        // If this enemy is PlayerOnly, damage the player
-        if (targetType == TargetType.PlayerOnly && other.gameObject.CompareTag("Player")) {
-            // Decrease static player HP
-            PlayerManager.health -= enemyDamage;
-            Debug.Log(name + " collided with Player, dealing " + enemyDamage + " damage. Player HP is now: " + PlayerManager.health);
-
-            // If this enemy is CoreOnly, damage the core
-        } else if (targetType == TargetType.CoreOnly && other.gameObject.CompareTag("Core")) {
+        if (targetType == TargetType.CoreOnly && other.gameObject.CompareTag("Core")) {
             CoreHealth ch = other.gameObject.GetComponent<CoreHealth>();
             if (ch != null) {
                 ch.TakeDamage(enemyDamage);
@@ -120,7 +110,16 @@ public class FollowingEnemy : MonoBehaviour
         
    }
 
-    public bool TakeDamage(float damageAmount) {
+   
+   //have to use this one because the player has the controller
+   private void OnTriggerEnter(Collider other) {
+       if (targetType == TargetType.PlayerOnly && other.gameObject.CompareTag("Player")) {
+           playerManager.GetComponent<PlayerManager>().TakeDamage(enemyDamage);
+           Debug.Log(name + " collided with Player, dealing " + enemyDamage + " damage. Player HP is now: " + PlayerManager.health);
+       }
+   }
+
+   public bool TakeDamage(float damageAmount) {
         health -= damageAmount;
         if (healthBar) {
             healthBar.UpdateHealthBar(health, maxHealth);
