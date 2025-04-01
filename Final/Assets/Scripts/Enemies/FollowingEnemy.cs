@@ -125,6 +125,8 @@ public class FollowingEnemy : MonoBehaviour
             healthBar.UpdateHealthBar(health, maxHealth);
         }
         if (health <= 0) {
+            EnemySpawner.enemiesAlive--;
+            Debug.Log("Killed enemy, " + EnemySpawner.enemiesAlive + " remaining");
             Destroy(gameObject);
             return true;
         }
