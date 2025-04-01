@@ -79,7 +79,7 @@ public class FPSShooter : MonoBehaviour {
     
 
         if (gameObject.GetComponent<FPSController>().mouseOff) {
-            if (spellLevelFire == 3) {
+            if (spellLevelFire == 3 && spell == "Fire") {
                 if (Input.GetButtonDown("Fire1")) {
                     Flamethrower.gameObject.SetActive(true);
                 }
