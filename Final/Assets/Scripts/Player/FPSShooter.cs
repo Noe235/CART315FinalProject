@@ -11,16 +11,21 @@ public class FPSShooter : MonoBehaviour {
     public Transform LHFirePoint, RHFirePoint, IceFirePoint1, IceFirePoint2, IceFirePoint3, IceFirePoint4, IceFirePoint5; //from left ot right
     public float projectileSpeed = 30;
     public float fireRate = 4;
-    public string spell;
+    static public string spell;
+   // static public string [] spells= {"Fire","Ice"}; // proably a better way to make the spell but its too long to change now ._.
+    //static int currentSpellIndex = 0;
+    
     static public int spellLevelFire = 1;
     static public int spellLevelIce = 1;
     
+    [SerializeField] private GameObject playerManager;
     [SerializeField] private GameObject Flamethrower;
     
 
     private Vector3 destination;
     private bool leftHand;
     private float timeToFire;
+   
 
 
 
@@ -28,7 +33,9 @@ public class FPSShooter : MonoBehaviour {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
         spell = "Fire";
-        
+        playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
+        playerManager.GetComponent<PlayerManager>().UpdateWand();
+        playerManager.GetComponent<PlayerManager>().UpdateSpell();
     }
 
     // Update is called once per frame
@@ -39,29 +46,37 @@ public class FPSShooter : MonoBehaviour {
             } else if (spell == "Fire") {
                 spell = "Ice";
             }
-            Debug.Log("Key down");
+            playerManager.GetComponent<PlayerManager>().UpdateWand();
+            playerManager.GetComponent<PlayerManager>().UpdateSpell();
+            Debug.Log(spell);
         }
 
         if (Input.GetKeyDown(KeyCode.T)) {
-            if (spellLevelFire < 4) {
+            if (spellLevelFire <3) {
                 spellLevelFire++;
             }
             else {
                 spellLevelFire = 1;
             }
             Debug.Log(spellLevelFire);
+            playerManager.GetComponent<PlayerManager>().UpdateWand();
+            
         }
 
         if (Input.GetKeyDown(KeyCode.Y)) {
-            if (spellLevelIce < 4) {
+            if (spellLevelIce <3) {
                 spellLevelIce++;
             }
             else {
                 spellLevelIce = 1;
             }
             Debug.Log(spellLevelIce);
+            playerManager.GetComponent<PlayerManager>().UpdateWand();
         }
 
+        CheckMouse();
+        
+    
 
         if (gameObject.GetComponent<FPSController>().mouseOff) {
             if (spellLevelFire == 3) {
@@ -83,6 +98,29 @@ public class FPSShooter : MonoBehaviour {
 
 
         }
+    }
+
+    private void CheckMouse() {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll > 0f) // Scroll up
+        {
+            if (spell == "Fire") {
+                spell = "Ice";
+            } else {
+                spell = "Fire";
+            }
+            
+        }
+        else if (scroll < 0f) // Scroll down
+        {
+            if (spell == "Fire") {
+                spell = "Ice";
+            }else {
+                spell = "Fire";
+            }
+        }
+        playerManager.GetComponent<PlayerManager>().UpdateWand();
+        playerManager.GetComponent<PlayerManager>().UpdateSpell();
     }
 
     void ShootProjectile() {
@@ -130,5 +168,9 @@ public class FPSShooter : MonoBehaviour {
         projectileObj.GetComponent<Rigidbody>().AddForce(firePoint.forward * projectileSpeed, ForceMode.Impulse); 
     }
 
+   /* public string GetCurrentSpell()
+    {
+        return spells[currentSpellIndex]; // Get current spell as a string
+        */
+    }
 
-}

@@ -529,7 +529,7 @@ MonoBehaviour:
   maxHealth: 100
   healthBar: {fileID: 8932645962934041931}
   enemyDamage: 10
-  targetType: 1
+  targetType: 0
   agent: {fileID: 1213107106498628955}
   uuid: 
 --- !u!195 &1213107106498628955
