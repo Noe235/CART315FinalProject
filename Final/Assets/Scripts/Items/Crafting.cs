@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Crafting : MonoBehaviour {
    [SerializeField] private InventorySlot[] inventorySlots;
@@ -8,6 +9,8 @@ public class Crafting : MonoBehaviour {
    [SerializeField] private Item iceItem;
    [SerializeField] private GameObject fireCraft;
    [SerializeField] private GameObject iceCraft;
+   public TextMeshProUGUI firetext;
+   public TextMeshProUGUI icetext;
 
 
    private void Start() {
@@ -16,13 +19,24 @@ public class Crafting : MonoBehaviour {
    }
 
    void Update() {
-      if (CheckUpgradeFireSpell()) {
+      if (FPSShooter.spellLevelFire == 3) {
+         fireCraft.GetComponentInChildren<TextMeshProUGUI>().SetText( "Fire Spell Max Upgrade");
+      }
+      if (FPSShooter.spellLevelIce == 3) {
+         iceCraft.GetComponentInChildren<TextMeshProUGUI>().SetText("Ice Spell Max Upgrade");
+
+      }
+      if (CheckUpgradeFireSpell() && FPSShooter.spellLevelFire <= 2 ) {
          fireCraft.GetComponent<Button>().interactable = true;
       }
 
-      if (CheckUpgradeIceSpell()) {
+      if (CheckUpgradeIceSpell() && FPSShooter.spellLevelIce <= 2) {
          iceCraft.GetComponent<Button>().interactable = true;
       }
+
+      
+
+      
    }
 
    public bool CheckUpgradeFireSpell() {
@@ -47,7 +61,6 @@ public class Crafting : MonoBehaviour {
             itemInSlot.RefreshCount();
          }
       }
-      Debug.Log(FPSShooter.spellLevelFire);
    }
    
    public bool CheckUpgradeIceSpell() {
@@ -63,7 +76,7 @@ public class Crafting : MonoBehaviour {
 
    public void UpgradeIceSpell() {
       iceCraft.GetComponent<Button>().interactable = false;
-      FPSShooter.spellLevelFire++;
+      FPSShooter.spellLevelIce++;
       for (int i = 0; i < inventorySlots.Length; i++) {
          InventorySlot slot = inventorySlots[i];
          InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
@@ -72,6 +85,5 @@ public class Crafting : MonoBehaviour {
             itemInSlot.RefreshCount();
          }
       }
-      Debug.Log(FPSShooter.spellLevelIce);
    }
 }

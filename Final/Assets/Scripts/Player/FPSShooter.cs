@@ -40,6 +40,7 @@ public class FPSShooter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        //To remove in final
         if (Input.GetKeyDown(KeyCode.H)) {
             if (spell == "Ice") {
                 spell = "Fire";
@@ -48,9 +49,8 @@ public class FPSShooter : MonoBehaviour {
             }
             playerManager.GetComponent<PlayerManager>().UpdateWand();
             playerManager.GetComponent<PlayerManager>().UpdateSpell();
-            Debug.Log(spell);
         }
-
+        //To remove in final
         if (Input.GetKeyDown(KeyCode.T)) {
             if (spellLevelFire <3) {
                 spellLevelFire++;
@@ -58,11 +58,10 @@ public class FPSShooter : MonoBehaviour {
             else {
                 spellLevelFire = 1;
             }
-            Debug.Log(spellLevelFire);
             playerManager.GetComponent<PlayerManager>().UpdateWand();
             
         }
-
+        //To remove in final
         if (Input.GetKeyDown(KeyCode.Y)) {
             if (spellLevelIce <3) {
                 spellLevelIce++;
@@ -70,7 +69,6 @@ public class FPSShooter : MonoBehaviour {
             else {
                 spellLevelIce = 1;
             }
-            Debug.Log(spellLevelIce);
             playerManager.GetComponent<PlayerManager>().UpdateWand();
         }
 

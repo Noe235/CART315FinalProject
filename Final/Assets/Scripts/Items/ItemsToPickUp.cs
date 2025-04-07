@@ -20,7 +20,7 @@ public class ItemsToPickUp : MonoBehaviour {
    private void OnTriggerEnter(Collider other) {
       if (other.tag == "Player") {
          bool canAdd = InventoryManager.instance.AddItem(item);
-        // Destroy(this.gameObject);
+        Destroy(this.gameObject);
          Debug.Log("added" + item.name);
       }
      
