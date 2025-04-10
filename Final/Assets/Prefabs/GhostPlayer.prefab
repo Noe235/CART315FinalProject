@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 7545111493683539704}
+    - target: {fileID: 2442905477042813912, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
+      propertyPath: enemyDamage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2519097868024618270, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_Mass
       value: 100
@@ -98,7 +102,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262683393462083191, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4706532240748260676, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_AnchorMax.x
