@@ -21,9 +21,8 @@ public class EnemySpawner : MonoBehaviour {
         
     // scene load settings: start from wave 1
     void Awake() {
-        enemiesAlive = 0;
-        currentRunScore = 0;
         waveIndex = 1;
+        currentRunScore = 0;
         waveInProgress = false;
         autoWaveStarted = false;
     }
@@ -80,7 +79,6 @@ public class EnemySpawner : MonoBehaviour {
         }
     }
     
-
     // change to now spawn a single enemy instead of looping here
     private void SpawnEnemy() {
         GameObject spawnee = Enemies[Random.Range(0, Enemies.Length)];
@@ -91,4 +89,13 @@ public class EnemySpawner : MonoBehaviour {
         
         Instantiate(spawnee, loc, Quaternion.identity);
     }
+    
+    public static void EnemyDied()
+    {
+        enemiesAlive--;
+        currentRunScore += 1; // add 1 point per kill
+        Debug.Log("Killed enemy, " + enemiesAlive + " remaining");
+    }
+    
+    
 }

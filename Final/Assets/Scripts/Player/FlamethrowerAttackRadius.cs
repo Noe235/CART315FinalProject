@@ -7,7 +7,7 @@ using UnityEngine;
 public class FlamethrowerAttackRadius : MonoBehaviour {
 
     private Dictionary<string,FollowingEnemy> EnemiesInRadius = new Dictionary<string, FollowingEnemy>();
-
+    private Dictionary<string, Ghost_Enemy> GhostsInRadius = new Dictionary<string, Ghost_Enemy>();
     [SerializeField] private float damage;
     
     
@@ -25,6 +25,12 @@ public class FlamethrowerAttackRadius : MonoBehaviour {
 
              EnemiesInRadius.Add(collided.uuid, collided);
          }
+         
+         // add a new pair for Ghost_Enemy
+         var ghosted = other.GetComponent<Ghost_Enemy>();
+         if (!GhostsInRadius.ContainsKey(ghosted.uuid)) {
+             GhostsInRadius.Add(ghosted.uuid, ghosted);
+         }
 
         }
     }
@@ -33,6 +39,10 @@ public class FlamethrowerAttackRadius : MonoBehaviour {
         if (other.gameObject.tag == "BasicEnemy") {
             var collided = other.GetComponent<FollowingEnemy>();
             EnemiesInRadius.Remove(collided.uuid);
+            
+            // add Ghost_Enemy script
+            var ghosted = other.GetComponent<Ghost_Enemy>();
+            GhostsInRadius.Remove(ghosted.uuid);
         }
     }
     private void OnDisable() {
@@ -53,6 +63,18 @@ public class FlamethrowerAttackRadius : MonoBehaviour {
             foreach (string uuid in toRemove) {
                 EnemiesInRadius.Remove(uuid);
             }
+            
+            // also damage all Ghost_Enemy
+            List<string> ghostRemove = new List<string>();
+            foreach (var ghost in GhostsInRadius.Values) {
+                if (ghost.TakeDamage(damage)) {
+                    ghostRemove.Add(ghost.uuid);
+                }
+            }
+            foreach (string gID in ghostRemove) {
+                GhostsInRadius.Remove(gID);
+            }
+            
             nextTick = DateTime.Now.AddMilliseconds(TickInterval);
         }
     }

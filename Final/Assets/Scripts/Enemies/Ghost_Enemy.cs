@@ -117,7 +117,10 @@ public class Ghost_Enemy : MonoBehaviour
         if (health <= 0) {
             EnemySpawner.enemiesAlive--;
             Debug.Log("Killed enemy, " + EnemySpawner.enemiesAlive + " remaining");
-
+            // Increase score +1 (for score UI)
+            EnemySpawner.currentRunScore += 1;
+            Debug.Log("Killed enemy, " + EnemySpawner.enemiesAlive + " remaining. Score: " + EnemySpawner.currentRunScore);
+            
             // TO DO: Add dissolve animation maybe
             Destroy(gameObject);
             return true;

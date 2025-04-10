@@ -77,6 +77,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2442905477042813912, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
+      propertyPath: core
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442905477042813912, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: agent
       value: 
       objectReference: {fileID: 0}
@@ -102,7 +106,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4262683393462083191, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4706532240748260676, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_AnchorMax.x
