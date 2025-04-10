@@ -14,7 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 75630101695481875, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_Speed
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 75630101695481875, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 796652407307068396, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -81,12 +85,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7545111493683539704}
     - target: {fileID: 2519097868024618270, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519097868024618270, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262683393462083191, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4262683393462083191, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_IsTrigger
