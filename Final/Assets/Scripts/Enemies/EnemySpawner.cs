@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour {
     
     public static int enemiesAlive = 0;
-    public static int currentRunScore = 0; 
+    public static int currentRunScore = 0;
     
     
     // These are references to the two prefabs 
@@ -12,19 +12,21 @@ public class EnemySpawner : MonoBehaviour {
     [SerializeField] public GameObject[] Enemies;
     
     // Current wave
-    private int waveIndex = 1;
+    public static int waveIndex = 1;
     private bool waveInProgress = false;    // are we currently spawning?
     private bool autoWaveStarted = false;
+    
     
     [SerializeField] public float SpawnRate;
     [SerializeField] private int minRx,maxRx,minRy,maxRy;
         
     // scene load settings: start from wave 1
     void Awake() {
-        waveIndex = 1;
-        currentRunScore = 0;
-        waveInProgress = false;
-        autoWaveStarted = false;
+        enemiesAlive = 0;
+        // waveIndex = 1;
+        // currentRunScore = 0;
+        // waveInProgress = false;
+        // autoWaveStarted = false;
     }
     
     // Update is called once per frame

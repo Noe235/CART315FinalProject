@@ -95,8 +95,7 @@ public class Ghost_Enemy : MonoBehaviour
         if (targetType == TargetType.PlayerOnly && other.gameObject.CompareTag("Player")) {
             if (playerManager) {
                 playerManager.GetComponent<PlayerManager>().TakeDamage(enemyDamage);
-                Debug.Log(name + " collided with Player, dealing " + enemyDamage +
-                          " damage. Player HP is now: " + PlayerManager.health);
+                Debug.Log(name + " collided with Player, dealing " + enemyDamage + " damage. Player HP is now: " + PlayerManager.health);
 
                 // TO DO: Attack animation
                 // if (anim) anim.CrossFade(AttackState, 0.1f, 0, 0);

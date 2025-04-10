@@ -35,6 +35,9 @@ public class GameOverMenu : MonoBehaviour
     }
     
     public void OnTryAgainButtonPressed() {
+        // reset waveIndex reset here
+        EnemySpawner.waveIndex = 1;
+        EnemySpawner.currentRunScore = 0; 
         // game scene to load
         SceneManager.LoadScene("Scenes/Game Scene/Level1");
     }
