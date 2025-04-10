@@ -4,6 +4,8 @@ using System.Collections;
 public class EnemySpawner : MonoBehaviour {
     
     public static int enemiesAlive = 0;
+    public static int currentRunScore = 0; 
+    
     
     // These are references to the two prefabs 
     // e.g. [0] = PlayerAttacker, [1] = CoreAttacker
@@ -19,8 +21,9 @@ public class EnemySpawner : MonoBehaviour {
         
     // scene load settings: start from wave 1
     void Awake() {
-        waveIndex = 1;
         enemiesAlive = 0;
+        currentRunScore = 0;
+        waveIndex = 1;
         waveInProgress = false;
         autoWaveStarted = false;
     }
