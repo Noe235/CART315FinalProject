@@ -26,9 +26,10 @@ public class FPSShooter : MonoBehaviour {
     private bool leftHand;
     private float timeToFire;
    
-
-
-
+    [Header("Spell SFX")]
+    [SerializeField] private AudioClip fireCastClip;
+    [SerializeField] private AudioClip iceCastClip;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
@@ -143,7 +144,7 @@ public class FPSShooter : MonoBehaviour {
        }
 
        if (spell == "Ice") { //probably make an array ._.
-           
+           AudioManager.I.PlaySFX(iceCastClip);  
            ShootIce(IceFirePoint3);
            if (spellLevelIce >= 2) {
                ShootIce(IceFirePoint2);
@@ -159,6 +160,7 @@ public class FPSShooter : MonoBehaviour {
     void InstantiateProjectile(Transform firePoint) {
         GameObject projectileObj = Instantiate(fireball, firePoint.position, Quaternion.identity);
         projectileObj.GetComponent<Rigidbody>().AddForce(firePoint.forward * projectileSpeed, ForceMode.Impulse);
+        AudioManager.I.PlaySFX(fireCastClip);
     }
 
     void ShootIce(Transform firePoint) {
