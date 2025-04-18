@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 09c0a705fa4e4f44b927b4c2739b3eaf
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 60072b568d64c40a485e0fc55012dc9f, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 289115
+  packageName: Medieval Arena - Cute Series URP
+  packageVersion: 1.0
+  assetPath: Assets/Medieval Cute Series/Materials/Stylized Refracted UV.shadersubgraph
+  uploadId: 678525

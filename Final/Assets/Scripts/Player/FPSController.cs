@@ -1,14 +1,17 @@
+using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class FPSController : MonoBehaviour {
     public int FPS = 120;
     public float speed = 6.0F;
     public float jumpSpeed = 20.0F;
-    public float gravity = 20.0F;
+    public float gravity = 25F;
     public bool mouseOff = true;
     
     private Vector3 moveDirection = Vector3.zero;
     
+    [SerializeField] private Collider playerCollider;
 
     float yRotation;
     float xRotation;
@@ -53,14 +56,6 @@ public class FPSController : MonoBehaviour {
         if (Input.GetKey(KeyCode.Tab)) {
             MouseEnabler();
         }
-
-        if (Input.GetKey(KeyCode.K)) {
-            FPSShooter.spellLevel = 2;
-        }
-
-        if (Input.GetKey(KeyCode.L)) {
-            FPSShooter.spellLevel = 1;
-        }
         
 
     }
@@ -77,4 +72,5 @@ public class FPSController : MonoBehaviour {
         }
         
     }
+    
 }

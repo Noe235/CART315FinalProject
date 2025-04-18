@@ -1,5 +1,3 @@
-using System;
-using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,6 +6,7 @@ public class FollowingEnemy : MonoBehaviour
     [SerializeField] private GameObject core;
     [SerializeField] private GameObject player;
     [SerializeField] private float followspeed;
+    [SerializeField] private GameObject playerManager;
 
     [SerializeField] private float health;
     [SerializeField] private float maxHealth;
@@ -17,32 +16,31 @@ public class FollowingEnemy : MonoBehaviour
     [SerializeField] private TargetType targetType = TargetType.CoreOnly;
 
     public NavMeshAgent agent;
+
+    public string uuid;
     
-    // private enum State {
-    //     HeadToCore,
-    //     AttackPlayer,
-    // }
     
     public enum TargetType {
         CoreOnly,
         PlayerOnly 
     }
-    
-    // private State state;
 
-    // void Awake() {
-    //     healthBar = GetComponentInChildren<EnemyHealth>();
-    //     state = State.HeadToCore;
-    // }
-    // // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake() {
+        uuid = System.Guid.NewGuid().ToString();
+    }
+   
     void Start() {
         health = maxHealth;
         core = GameObject.FindGameObjectWithTag("Core");
         player = GameObject.FindGameObjectWithTag("Player");
+        playerManager = GameObject.FindGameObjectWithTag("PlayerManager");
+        
+        
         
         if (!healthBar) {
             healthBar = GetComponentInChildren<EnemyHealth>();
         }
+        
     }
 
     // Update is called once per frame
@@ -92,40 +90,49 @@ public class FollowingEnemy : MonoBehaviour
                 }
                 break;
         }
+
+
+     
     }
 
    private void OnCollisionEnter(Collision other) {
-        // if (other.gameObject.tag == "Player") {
-        //     // damage player
-        //     PlayerManager.health -= enemyDamage; 
-       
-        
-        // If this enemy is PlayerOnly, damage the player
-        if (targetType == TargetType.PlayerOnly && other.gameObject.CompareTag("Player")) {
-            // Decrease static player HP
-            PlayerManager.health -= enemyDamage;
-            Debug.Log(name + " collided with Player, dealing " + enemyDamage + " damage. Player HP is now: " + PlayerManager.health);
-
-            // If this enemy is CoreOnly, damage the core
-        } else if (targetType == TargetType.CoreOnly && other.gameObject.CompareTag("Core")) {
+        if (targetType == TargetType.CoreOnly && other.gameObject.CompareTag("Core")) {
             CoreHealth ch = other.gameObject.GetComponent<CoreHealth>();
             if (ch != null) {
                 ch.TakeDamage(enemyDamage);
                 Debug.Log(name + " collided with Core, dealing " + enemyDamage + " damage.");
             }
         }
+        
+        
    }
 
-    public void TakeDamage(float damageAmount) {
+   
+   //have to use this one because the player has the controller
+   private void OnTriggerEnter(Collider other) {
+       if (targetType == TargetType.PlayerOnly && other.gameObject.CompareTag("Player")) {
+           playerManager.GetComponent<PlayerManager>().TakeDamage(enemyDamage);
+           Debug.Log(name + " collided with Player, dealing " + enemyDamage + " damage. Player HP is now: " + PlayerManager.health);
+       }
+   }
+
+   public bool TakeDamage(float damageAmount) {
         health -= damageAmount;
         if (healthBar) {
             healthBar.UpdateHealthBar(health, maxHealth);
         }
         if (health <= 0) {
+            EnemySpawner.enemiesAlive--;
+            Debug.Log("Killed enemy, " + EnemySpawner.enemiesAlive + " remaining");
             Destroy(gameObject);
+            return true;
         }
+        return false;
     }
-
+    
+   
+    
+    
     // private void FindPlayer() {
     //     float playerDetectRange = 15f;
     //     player = GameObject.FindGameObjectWithTag("Player");
@@ -135,3 +142,4 @@ public class FollowingEnemy : MonoBehaviour
     //     }
     // }
 }
+

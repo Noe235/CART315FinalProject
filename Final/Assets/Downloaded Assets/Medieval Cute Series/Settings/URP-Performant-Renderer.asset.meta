@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 98157c438a7fa014aab468b4e5aed9dc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 289115
+  packageName: Medieval Arena - Cute Series URP
+  packageVersion: 1.0
+  assetPath: Assets/Medieval Cute Series/Settings/URP-Performant-Renderer.asset
+  uploadId: 678525
