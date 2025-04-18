@@ -21,7 +21,7 @@ public class FlamethrowerAttackRadius : MonoBehaviour {
         if (other.gameObject.tag == "BasicEnemy") {
             
          var collided = other.GetComponent<FollowingEnemy>();
-         if (!EnemiesInRadius.ContainsKey(collided.uuid)) {
+         if (collided != null && !EnemiesInRadius.ContainsKey(collided.uuid)) {
 
              EnemiesInRadius.Add(collided.uuid, collided);
          }
