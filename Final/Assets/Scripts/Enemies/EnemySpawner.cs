@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour {
     public static int waveIndex = 1;
     private bool waveInProgress = false;    // are we currently spawning?
     private bool autoWaveStarted = false;
-    
+    private bool firstWaveCountdownStarted = false;
     
     [SerializeField] public float SpawnRate;
     [SerializeField] private int minRx,maxRx,minRy,maxRy;
@@ -31,27 +31,45 @@ public class EnemySpawner : MonoBehaviour {
     
     // Update is called once per frame
     void Update() {
-        // If no wave is spawning AND enemiesAlive == 0, press "I" to start Wave 1
-        if (!waveInProgress && enemiesAlive <= 0 && waveIndex == 1) {
-            if (Input.GetKeyDown(KeyCode.I)) {
-                Debug.Log("Wave " + waveIndex + " beginning!");
-                StartCoroutine(SpawnWave());
-            }
+        // start wave 1 automatically after initial countdown
+        if (!waveInProgress && enemiesAlive <= 0 && waveIndex == 1 && !firstWaveCountdownStarted)
+        {
+            firstWaveCountdownStarted = true;
+            StartCoroutine(FirstWaveCountdown());
         }
         
         //  wave cleared => Start next wave countdown (waveInProgress = false, enemiesAlive = 0, waveIndex > 1)
         if (!waveInProgress && enemiesAlive <= 0 && waveIndex > 1 && !autoWaveStarted) {
             autoWaveStarted = true;
-            StartCoroutine(AutoSpawnNextWave(5f));
+            StartCoroutine(AutoSpawnNextWave(10f));
         }
+    }
+    
+    private IEnumerator FirstWaveCountdown()
+    {
+        int remaining = 5;                     // show 5‑4‑3‑2‑1
+        while (remaining > 0)
+        {
+            GameMessageUI.Instance.Show($"First wave spawning in {remaining} second(s)", 1f);
+            yield return new WaitForSeconds(1f);
+            remaining--;
+        }
+
+        var msg = $"Wave {waveIndex} beginning!";
+        GameMessageUI.Instance.Show(msg, 3f);
+        Debug.Log(msg);
+
+        StartCoroutine(SpawnWave());           // kick off Wave
     }
     
     // spawns a specific number of enemies
     private IEnumerator SpawnWave() {
         waveInProgress = true;
-        // waveIndex 1 => 10 enemies, waveIndex 2 => 20, waveIndex 3 => 30, etc.
-        int countThisWave = 10 * waveIndex;
-        Debug.Log("Spawning wave #" + waveIndex + " with " + countThisWave + " enemies");
+        // waveIndex 1 => 5 enemies, waveIndex 2 => 10, waveIndex 3 => 15, etc.
+        int countThisWave = 5 * waveIndex;
+        var msg = "Spawning wave #" + waveIndex + " with " + countThisWave + " enemies";
+        GameMessageUI.Instance.Show(msg, 2f);
+        Debug.Log(msg);
 
         for (int i = 0; i < countThisWave; i++) {
             SpawnEnemy();
@@ -60,7 +78,7 @@ public class EnemySpawner : MonoBehaviour {
         }
 
         // wave complete
-        waveIndex++; // next wave will have 10 more
+        waveIndex++; // next wave will have 5 more
         waveInProgress = false;
         autoWaveStarted = false; // next wave auto starts when enemies = 0
     }
@@ -69,14 +87,18 @@ public class EnemySpawner : MonoBehaviour {
     private IEnumerator AutoSpawnNextWave(float delay) {
         float remaining = delay;
         while (remaining > 0) {
-            Debug.Log($"Wave {waveIndex} will begin in {remaining} second(s)...");
+            var msg = $"Wave {waveIndex} will begin in {remaining} second(s)...";
+            GameMessageUI.Instance.Show(msg, 1f);
+            Debug.Log(msg);
             // Countdown next wave every second in debug log
             yield return new WaitForSeconds(1f);
             remaining -= 1f;
         }
         // wave spawn check
         if (!waveInProgress && enemiesAlive <= 0) {
-            Debug.Log("Wave " + waveIndex + " beginning now!");
+            var msg = "Wave " + waveIndex + " beginning now!";
+            GameMessageUI.Instance.Show(msg, 3f);
+            Debug.Log(msg);
             StartCoroutine(SpawnWave());
         }
     }

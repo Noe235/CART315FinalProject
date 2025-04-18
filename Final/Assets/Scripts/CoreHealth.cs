@@ -20,7 +20,9 @@ public class CoreHealth : MonoBehaviour
 
     public void TakeDamage(float damage) {
         // TO DO: FIX DEBUG LOG: Debug.Log(gameObject.name + " took " + damage + " damage. Current HP: " + currentHealth);
-        Debug.Log($"{gameObject.name} took {damage} damage! Core HP is now: {currentHealth}");
+        var msg = $"Core took {damage} damage! Core HP is now: {currentHealth}";
+        GameMessageUI.Instance.Show(msg, 1f);
+        Debug.Log(msg);
         currentHealth -= damage;
         
         // update floating bar

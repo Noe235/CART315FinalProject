@@ -6,7 +6,7 @@ public class FPSController : MonoBehaviour {
     public int FPS = 120;
     public float speed = 6.0F;
     public float jumpSpeed = 20.0F;
-    public float gravity = 20.0F;
+    public float gravity = 17.5F;
     public bool mouseOff = true;
     
     private Vector3 moveDirection = Vector3.zero;

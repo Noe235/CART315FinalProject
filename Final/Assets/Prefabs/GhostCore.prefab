@@ -86,15 +86,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2442905477042813912, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: health
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2442905477042813912, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 7545111493683539704}
     - target: {fileID: 2442905477042813912, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
+      propertyPath: maxHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442905477042813912, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: targetType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442905477042813912, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
+      propertyPath: followspeed
+      value: 2.79
       objectReference: {fileID: 0}
     - target: {fileID: 2519097868024618270, guid: 8ee08d04ad5df46fbb2e97260b63420b, type: 3}
       propertyPath: m_Mass

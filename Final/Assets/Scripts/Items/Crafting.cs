@@ -11,7 +11,10 @@ public class Crafting : MonoBehaviour {
    [SerializeField] private GameObject iceCraft;
    public TextMeshProUGUI firetext;
    public TextMeshProUGUI icetext;
-
+   
+   [Header("Balance")]
+   [Tooltip("How many items are consumed per spell upgrade")]
+   [SerializeField] private int upgradeCost = 5;
 
    private void Start() {
       fireCraft.GetComponent<Button>().interactable = false;
@@ -43,7 +46,7 @@ public class Crafting : MonoBehaviour {
       for (int i = 0; i < inventorySlots.Length; i++) {
          InventorySlot slot = inventorySlots[i];
          InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-         if (itemInSlot != null && itemInSlot.item == fireItem && itemInSlot.count >= 10) {
+         if (itemInSlot != null && itemInSlot.item == fireItem && itemInSlot.count >= upgradeCost) {
             return true;
          }
       }
@@ -53,11 +56,12 @@ public class Crafting : MonoBehaviour {
    public void UpgradeFireSpell() {
       fireCraft.GetComponent<Button>().interactable = false;
       FPSShooter.spellLevelFire++;
+      GameMessageUI.Instance.Show("Fire spell upgraded!", 2f);
       for (int i = 0; i < inventorySlots.Length; i++) {
          InventorySlot slot = inventorySlots[i];
          InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
          if (itemInSlot != null && itemInSlot.item == fireItem) {
-            itemInSlot.count -= 10;
+            itemInSlot.count -= upgradeCost;
             itemInSlot.RefreshCount();
          }
       }
@@ -67,7 +71,7 @@ public class Crafting : MonoBehaviour {
       for (int i = 0; i < inventorySlots.Length; i++) {
          InventorySlot slot = inventorySlots[i];
          InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
-         if (itemInSlot != null && itemInSlot.item == iceItem && itemInSlot.count >= 10) {
+         if (itemInSlot != null && itemInSlot.item == iceItem && itemInSlot.count >= upgradeCost) {
             return true;
          }
       }
@@ -77,11 +81,12 @@ public class Crafting : MonoBehaviour {
    public void UpgradeIceSpell() {
       iceCraft.GetComponent<Button>().interactable = false;
       FPSShooter.spellLevelIce++;
+      GameMessageUI.Instance.Show("Ice spell upgraded!", 2f);
       for (int i = 0; i < inventorySlots.Length; i++) {
          InventorySlot slot = inventorySlots[i];
          InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
          if (itemInSlot != null && itemInSlot.item == iceItem) {
-            itemInSlot.count -= 10;
+            itemInSlot.count -= upgradeCost;
             itemInSlot.RefreshCount();
          }
       }
