@@ -10,14 +10,14 @@ EditorBuildSettings:
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
     path: Assets/Scenes/Game Scene/Level1.unity
-    guid: b26140ae3b43d46688644166fb06791c
-  - enabled: 1
+    guid: 22d803e4f19484f929ad627c2de28f7f
+  - enabled: 0
     path: Assets/Scenes/Game Scene/GameOverScene.unity
     guid: 12c2b88eeb118403f8907634725afc54
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/EnemyHorde.unity
     guid: c06602451d52b424a930dd779cfaf8a9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Game Scene/Level1.unity
     guid: 22d803e4f19484f929ad627c2de28f7f
   m_configObjects:
