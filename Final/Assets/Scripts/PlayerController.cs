@@ -21,9 +21,9 @@ public class Character : MonoBehaviour {
         characterController = GetComponent<CharacterController>();
         playerCamera = GetComponentInChildren<Camera>();
 
-        // Lock the mouse cursor to the center of the screen & hide it
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // // Lock the mouse cursor to the center of the screen & hide it
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
     }
 
     void Update() {
